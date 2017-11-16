@@ -61,8 +61,8 @@ FusionEKF::FusionEKF() {
              0, 0, 0, 1000;
 
   //set the acceleration noise components
-  float noise_ax = 9;
-  float noise_ay = 9;
+  float noise_ax;
+  float noise_ay;
 }
 
 /**
@@ -108,7 +108,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       */
       ekf_.x_ << measurement_pack.raw_measurements_(0), measurement_pack.raw_measurements_(1), 0, 0;
     }
-    meas_package.raw_measurements_
+    //meas_package.raw_measurements_
     // done initializing, no need to predict or update
     is_initialized_ = true;
     previous_timestamp_ = measurement_pack.timestamp_;
@@ -126,7 +126,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
      * Update the process noise covariance matrix.
      * Use noise_ax = 9 and noise_ay = 9 for your Q matrix.
    */
-  float dt = (measurement_pack.timestamp_ - previous_timestamp_)
+  float dt = (measurement_pack.timestamp_ - previous_timestamp_);
   previous_timestamp_ = measurement_pack.timestamp_;
 
   // helper parameters for power 2, 3, and 4 of dt
@@ -141,6 +141,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   		      0, 0, 0, 1;
 
   // Set the process covariance matrix Q
+  noise_ax = 9;
+  noise_ay = 9;
 	ekf_.Q_ = MatrixXd(4, 4);
 	ekf_.Q_ <<  dt_4 / 4*noise_ax, 0, dt_3 / 2 * noise_ax, 0,
     			   0, dt_4 / 4 * noise_ay, 0, dt_3 / 2 * noise_ay,
