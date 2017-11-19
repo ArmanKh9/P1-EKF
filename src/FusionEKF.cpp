@@ -166,6 +166,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     ekf_.H_ = Hj_;
     ekf_.R_ = R_radar_;
     ekf_.UpdateEKF(measurement_pack.raw_measurements_);
+    cout << "measured y = " << measurement_pack.raw_measurements_(0)*sin(measurement_pack.raw_measurements_(1))<< endl;
     cout << "RADAR x_ = " << ekf_.x_ << endl;
     //cout << "Radar P_ = " << ekf_.P_ << endl;
     cout << "Hj = " << Hj_ << endl;
