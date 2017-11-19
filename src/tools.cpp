@@ -75,9 +75,6 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 	}
   if(py*py < 0.01 || px*px < 0.01){
     cout << "*******************px or py close to zero*********************" << endl;
-    Hj << 1, 1, 0, 0,
-          1, 1, 0, 0,
-          1, 1, 1, 1;
     return Hj;
   }
 
